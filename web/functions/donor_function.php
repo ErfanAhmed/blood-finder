@@ -19,6 +19,7 @@ function get_donor_list() {
     			<td>{$row['phone_no']}</td>
     			<td>{$row['email']}</td>
     			<td>{$row['address_id']}</td>
+    			<td>{$row['status']}</td>
     			<td><a href='edit.php?id={$row['id']}'>Edit</a></td>
     			<td>
     			    <form action='/isp/resources/package_function.php' method='post' role='form'>
