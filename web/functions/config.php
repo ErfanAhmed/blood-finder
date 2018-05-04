@@ -5,8 +5,8 @@
  * Date: 9/19/2017
  * Time: 9:00 PM
  */
-//ob_start();
-//session_start();
+ob_start();
+session_start();
 defined("DS") ? null : define("DS" , DIRECTORY_SEPARATOR);
 
 defined("TEMPLATE") ? null : define("TEMPLATE", __DIR__.DS.

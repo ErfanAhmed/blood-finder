@@ -11,11 +11,11 @@ include("../../../web/resources/template/header.php");
             <tr>
                 <th>SL</th>
                 <th>Name</th>
+                <th>Blood Type</th>
                 <th>Phone No</th>
                 <th>Email</th>
                 <th>Address</th>
                 <th>Status</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>

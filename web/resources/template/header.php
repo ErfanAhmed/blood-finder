@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Starter Template for Bootstrap</title>
+    <title>Blood Fighters</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -41,14 +41,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">Blood Fighters</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="/isp/resources/logout_function.php">Logout</a></li>
+                <li class="active"><a href="../../../public/view/welcome/index.php">Home</a></li>
+                <li><a href="../../../public/view/donor/register.php">Register</a></li>
+                <li><a href="../../../public/view/donor/list.php">All Fighters</a></li>
+                <li style="float: right"><a href="../../../web/functions/logout_function.php">Logout</a></li>
+                <li style="float: right"><a href="../../../public/view/auth/login.php">Login</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->

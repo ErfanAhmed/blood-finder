@@ -18,17 +18,11 @@ function get_donor_list() {
             <tr style='text-align: left'>
     			<td>{$i}</td>
     			<td>{$row['name']}</td>
+    			<td>{$row['blood_type']}</td>
     			<td>{$row['phone_no']}</td>
     			<td>{$row['email']}</td>
     			<td>{$row['address_id']}</td>
     			<td>{$row['status']}</td>
-    			<td><a href='edit.php?id={$row['id']}'>Edit</a></td>
-    			<td>
-    			    <form action='/isp/resources/package_function.php' method='post' role='form'>
-                        <input type='hidden' name='id' id='id' value='{$row['id']}'>
-                        <button type='delete' name='delete' class='btn btn-primary'>Discontinue</button>
-                    </form>
-    			</td>
     		</tr>
         ";
         $i++;

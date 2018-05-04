@@ -9,8 +9,8 @@ require_once("function.php");
 
 if (isset($_SESSION['user_name'])) {
     unset($_SESSION['user_name']);
-    redirect("/isp/public/auth/login.php");
+    redirect("../../public/view/auth/login.php");
 }else {
-    redirect("/isp/public/auth/login.php");
+    redirect("../../public/view/auth/login.php");
 }
 ?>
