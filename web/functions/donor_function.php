@@ -6,6 +6,8 @@
  * Time: 11:14 PM
  */
 require_once("function.php");
+require_once("address_function.php");
+
 function get_donor_list() {
     $result = query("SELECT * FROM donor WHERE status = 'ACTIVE'");
     confirm($result);
@@ -33,23 +35,30 @@ function get_donor_list() {
     }
 }
 
-function save_package() {
+function register_donor() {
     if (isset($_POST['submit'])) {
 
-        $name = escape_string($_POST['name']);
-        $speed = escape_string($_POST['speed']);
-        $price = escape_string($_POST['price']);
-        $description = escape_string($_POST['description']);
+        $address = create_address();
 
-        $query = query("INSERT INTO package(name, speed, price, description) VALUES ('{$name}', '{$speed}', '{$price}',
-                      '{$description}')");
+        $name = escape_string($_POST['name']);
+        $login_id = escape_string($_POST['login_id']);
+        $password = escape_string($_POST['password']);
+        $phone_no = escape_string($_POST['phone_no']);
+        $email = escape_string($_POST['email']);
+        $nid_no = escape_string($_POST['nid_no']);
+        $address_id = escape_string($address);
+
+        $query = query("INSERT INTO donor(name, login_id, password, phone_no, email, nid_no, address_id) 
+                            VALUES ('{$name}', '{$login_id}', '{$password}', '{$phone_no}', '{$email}', '{$nid_no}',
+                             '{$address_id}')");
+
         confirm($query);
-        redirect("index.php");
+        redirect("list.php");
     }
 }
 
 function update_package() {
-    if(isset($_POST['update'])) {
+    if (isset($_POST['update'])) {
 
         $id = escape_string($_POST['id']);
         $name = escape_string($_POST['name']);
@@ -93,7 +102,7 @@ function package_dropdown() {
     confirm($result);
     echo "<option value='' disabled>Select package</option>";
 
-    while($row = fetch_array($result)) {
+    while ($row = fetch_array($result)) {
         echo "<option value='{$row['id']}'>{$row['name']}</option>";
     }
 }

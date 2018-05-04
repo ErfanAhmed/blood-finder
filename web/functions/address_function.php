@@ -8,21 +8,15 @@
 function create_address () {
     if (isset($_POST['submit'])) {
 
-        $house_no = escape_string($_POST['house_no']);
-        $road_no = escape_string($_POST['road_no']);
-        $block_no = escape_string($_POST['block_no']);
         $police_station = escape_string($_POST['police_station']);
         $post_office = escape_string($_POST['post_office']);
         $post_code = escape_string($_POST['post_code']);
-        $area_name = escape_string($_POST['area_name']);
-        $area_location = escape_string($_POST['area_location']);
         $city = escape_string($_POST['city']);
         $division = escape_string($_POST['division']);
 
-        $query = query("INSERT INTO address(house_no, road_no, block_no, police_station, post_office, post_code,
-                        area_name, area_location, city, division)
-                        VALUES ('{$house_no}', '{$road_no}', '{$block_no}', '{$police_station}', '{$post_office}',
-                                '{$post_code}', '{$area_name}', '{$area_location}', '{$city}', '{$division}')");
+        $query = query("INSERT INTO address(police_station, post_office, post_code, city, division)
+                        VALUES ('{$police_station}', '{$post_office}', '{$post_code}', '{$city}', '{$division}')");
+
         confirm($query);
 
         return last_id();
