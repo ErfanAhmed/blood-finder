@@ -37,14 +37,28 @@ function search_donor() {
         $post_office = escape_string($_POST['post_office']);
         $city = escape_string($_POST['city']);
 
+        $ps_search = "";
+        $po_search = "";
+        $city_search = "";
+
+        if (!empty($police_station)) {
+            $ps_search = " AND a.police_station = '{$police_station}'";
+        }
+
+        if (!empty($post_office)) {
+            $post_office = " AND a.post_office = '{$post_office}'";
+        }
+
+        if (!empty($city)) {
+            $city_search = " AND a.city = '{$city}'";
+        }
+
         $result = query("SELECT * FROM donor d
                               JOIN address a
                               ON d.address_id = a.id
                               WHERE d.status = 'ACTIVE'
-                              AND d.blood_type = '{$blood_type}'
-                              AND a.police_station = '{$police_station}'
-                              AND a.post_office = '{$post_office}'
-                              AND a.city = '{$city}'");
+                              AND d.blood_type = '{$blood_type}'"
+                                .$ps_search.$po_search.$city_search);
 
         confirm($result);
 
@@ -130,7 +144,7 @@ function bt_dropdown() {
     $result = query("SELECT distinct blood_type FROM donor");
     confirm($result);
 
-    echo "<option value='' disabled>Select package</option>";
+    echo "<option value='' disabled>Select blood group</option>";
 
     while ($row = fetch_array($result)) {
         echo "<option value='{$row['blood_type']}'>{$row['blood_type']}</option>";
@@ -141,7 +155,7 @@ function city_dropdown() {
     $result = query("SELECT distinct city FROM address");
     confirm($result);
 
-    echo "<option value='' disabled>Select package</option>";
+    echo "<option value=''>Select city</option>";
 
     while ($row = fetch_array($result)) {
         echo "<option value='{$row['city']}'>{$row['city']}</option>";
@@ -152,7 +166,7 @@ function ps_dropdown() {
     $result = query("SELECT distinct police_station FROM address");
     confirm($result);
 
-    echo "<option value='' disabled>Select package</option>";
+    echo "<option value=''>Select police station</option>";
 
     while ($row = fetch_array($result)) {
         echo "<option value='{$row['police_station']}'>{$row['police_station']}</option>";
@@ -163,7 +177,7 @@ function po_dropdown() {
     $result = query("SELECT distinct post_office FROM address");
     confirm($result);
 
-    echo "<option value='' disabled>Select package</option>";
+    echo "<option value=''>Select post office</option>";
 
     while ($row = fetch_array($result)) {
         echo "<option value='{$row['post_office']}'>{$row['post_office']}</option>";
