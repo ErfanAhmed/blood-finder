@@ -28,8 +28,6 @@ function login() {
             $_SESSION['user_name'] = $row['name'];
             $_SESSION['user_id'] = $row['login_id'];
 
-            set_message("you successfully logged in");
-
             redirect("../../view/donor/profile.php");
         }
     }

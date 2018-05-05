@@ -10,6 +10,7 @@ require_once("function.php");
 if (isset($_SESSION['user_name']) || isset($_SESSION['user_id'])) {
     unset($_SESSION['user_name']);
     unset($_SESSION['user_id']);
+    set_message("You have successfully loged out");
     redirect("../../public/view/auth/login.php");
 } else {
     redirect("../../public/view/auth/login.php");

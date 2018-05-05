@@ -47,10 +47,23 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="../../../public/view/welcome/index.php">Home</a></li>
-                <li><a href="../../../public/view/donor/register.php">Register</a></li>
+
                 <li><a href="../../../public/view/donor/list.php">All Fighters</a></li>
-                <li style="float: right"><a href="../../../web/functions/logout_function.php">Logout</a></li>
-                <li style="float: right"><a href="../../../public/view/auth/login.php">Login</a></li>
+
+                <?php
+                    if (isset($_SESSION['user_name'])) {
+                        echo "<li><a href=\"../../../public/view/donor/profile.php\">My Profile</a></li>";
+                        echo "<li style=\"float: right\"><a href=\"../../../web/functions/logout_function.php\">
+                                Logout</a></li>";
+                    }
+                ?>
+
+                <?php
+                    if (!isset($_SESSION['user_name'])) {
+                        echo "<li><a href=\"../../../public/view/donor/register.php\">Register</a></li>";
+                        echo "<li style=\"float: right\"><a href=\"../../../public/view/auth/login.php\">Login</a></li>";
+                    }
+                ?>
             </ul>
         </div>
         <!--/.nav-collapse -->
