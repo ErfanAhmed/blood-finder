@@ -18,7 +18,7 @@ CREATE TABLE donor (
 id int(11) not null AUTO_INCREMENT,
 
 name varchar(50) not null,
-varchar(5) not null default 'X',
+blood_type varchar(5) not null default 'X',
 login_id varchar(11) not null UNIQUE,
 password varchar(11) not null,
 

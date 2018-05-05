@@ -5,6 +5,7 @@ include("../../../web/resources/template/header.php");
 
     <div class="starter-template">
         <h3>Log in</h3>
+
         <h4><?php get_message()?></h4>
 
         <?php login() ?>

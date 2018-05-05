@@ -49,7 +49,12 @@ function set_message($msg) {
 
 function get_message() {
     if(isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
+        echo "
+            <div class=\"alert alert-warning\">
+                <strong>{$_SESSION['message']}</strong>
+            </div>
+        ";
+
         unset($_SESSION['message']);
     }
 }

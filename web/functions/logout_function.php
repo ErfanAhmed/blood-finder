@@ -7,10 +7,11 @@
  */
 require_once("function.php");
 
-if (isset($_SESSION['user_name'])) {
+if (isset($_SESSION['user_name']) || isset($_SESSION['user_id'])) {
     unset($_SESSION['user_name']);
+    unset($_SESSION['user_id']);
     redirect("../../public/view/auth/login.php");
-}else {
+} else {
     redirect("../../public/view/auth/login.php");
 }
 ?>
