@@ -14,7 +14,6 @@ include("../../../web/resources/template/header.php");
                 <th>Blood Type</th>
                 <th>Phone No</th>
                 <th>Email</th>
-                <th>Address</th>
                 <th>Status</th>
             </tr>
             </thead>

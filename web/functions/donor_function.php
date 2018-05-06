@@ -21,7 +21,6 @@ function get_donor_list() {
     			<td>{$row['blood_type']}</td>
     			<td>{$row['phone_no']}</td>
     			<td>{$row['email']}</td>
-    			<td>{$row['address_id']}</td>
     			<td>{$row['status']}</td>
     		</tr>
         ";
@@ -41,6 +40,8 @@ function search_donor() {
         $po_search = "";
         $city_search = "";
 
+        $old_date = (date('m')-3)."-"."1-".date('y');
+
         if (!empty($police_station)) {
             $ps_search = " AND a.police_station = '{$police_station}'";
         }
@@ -57,7 +58,8 @@ function search_donor() {
                               JOIN address a
                               ON d.address_id = a.id
                               WHERE d.status = 'ACTIVE'
-                              AND d.blood_type = '{$blood_type}'"
+                              AND d.blood_type = '{$blood_type}'
+                              AND DATEDIFF(CURDATE(), IFNULL(d.last_donation_date, \"{$old_date}\")) >= 90"
                                 .$ps_search.$po_search.$city_search);
 
         confirm($result);
@@ -133,7 +135,7 @@ function get_donor_profile () {
                     
                 <li><p>
                         <span class=\"glyphicon glyphicon-plus\" style=\"width:50px;\"></span>
-                        Last donation Date: 15 Jun 2016
+                        Last donation Date: <b>{$row['last_donation_date']}</b>
                     </p></li>
             </ul>
             <hr>
@@ -188,6 +190,7 @@ function update_donor() {
         $phone_no = escape_string($_POST['phone_no']);
         $email = (int)escape_string($_POST['email']);
         $nid_no = escape_string($_POST['nid_no']);
+        $last_donation_date = escape_string($_POST['last_donation_date']);
         $version = (int)escape_string($_POST['version']) + 1;
 
         $query = query("UPDATE donor SET
@@ -196,6 +199,7 @@ function update_donor() {
                         phone_no = '$phone_no',
                         email = '$email',
                         nid_no = '$nid_no',
+                        last_donation_date = '$last_donation_date',
                         version = '$version',
                         updated = now()
                         WHERE id = '$id'

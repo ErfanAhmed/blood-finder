@@ -52,6 +52,12 @@ include("../../../web/resources/template/header.php");
 
                     <div class="form-group">
                         <label for=""></label>
+                        <input type="date" class="form-control" name="last_donation_date" id="date"
+                               value="<?php echo isset($row['last_donation_date']) ? $row['last_donation_date'] : null ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for=""></label>
                         <input type="text" class="form-control" name="phone_no" id="phone_no" placeholder="phone number..."
                                value="<?php echo isset($row['phone_no']) ? $row['phone_no'] : null ?>">
                     </div>

@@ -25,8 +25,9 @@ password varchar(11) not null,
 phone_no int(11) UNIQUE,
 email varchar(50) UNIQUE,
 nid_no varchar(50) UNIQUE,
-status varchar(11) DEFAULT 'ACTIVE'
-address_id int(11) not null;
+status varchar(11) DEFAULT 'ACTIVE',
+last_donation_date date,
+address_id int(11) not null,
 
 version int(11) not null,
 created timestamp not null Default current_timestamp,
