@@ -15,6 +15,7 @@ include("../../../web/resources/template/header.php");
                     </div>
 
                     <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+                        <h4><?php get_message()?></h4>
                         <?php get_donor_profile()?>
                     </div>
                 </div>

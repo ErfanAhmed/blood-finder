@@ -84,6 +84,7 @@ function register_donor() {
         $address = create_address();
 
         $name = escape_string($_POST['name']);
+        $blood_type = escape_string($_POST['blood_type']);
         $login_id = escape_string($_POST['login_id']);
         $password = escape_string($_POST['password']);
         $phone_no = escape_string($_POST['phone_no']);
@@ -91,9 +92,9 @@ function register_donor() {
         $nid_no = escape_string($_POST['nid_no']);
         $address_id = escape_string($address);
 
-        $query = query("INSERT INTO donor(name, login_id, password, phone_no, email, nid_no, address_id) 
-                            VALUES ('{$name}', '{$login_id}', '{$password}', '{$phone_no}', '{$email}', '{$nid_no}',
-                             '{$address_id}')");
+        $query = query("INSERT INTO donor(name, blood_type, login_id, password, phone_no, email, nid_no, address_id) 
+                            VALUES ('{$name}', '{$blood_type}', '{$login_id}', '{$password}', '{$phone_no}', '{$email}',
+                             '{$nid_no}', '{$address_id}')");
 
         confirm($query);
         redirect("list.php");
@@ -157,7 +158,7 @@ function get_donor_profile () {
                         </td>
                         
                         <td style='padding-left: 5px'>
-                            <a href='edit_address.php?id={$row['login_id']}'>
+                            <a href='edit_address.php?id={$row['login_id']}&a_id={$row['a_id']}'>
                                 <button type='button' name='' class='btn btn-primary'>Update address</button>
                             </a>
                         </td>
@@ -183,23 +184,26 @@ function update_donor() {
 
         $id = escape_string($_POST['id']);
         $name = escape_string($_POST['name']);
-        $speed = escape_string($_POST['speed']);
-        $price = (int)escape_string($_POST['price']);
-        $description = escape_string($_POST['description']);
+        $blood_type = escape_string($_POST['blood_type']);
+        $phone_no = escape_string($_POST['phone_no']);
+        $email = (int)escape_string($_POST['email']);
+        $nid_no = escape_string($_POST['nid_no']);
         $version = (int)escape_string($_POST['version']) + 1;
 
-        $query = query("UPDATE package SET
+        $query = query("UPDATE donor SET
                         name = '$name',
-                        speed = '$speed',
-                        price = '$price',
-                        description = '$description',
+                        blood_type = '$blood_type',
+                        phone_no = '$phone_no',
+                        email = '$email',
+                        nid_no = '$nid_no',
                         version = '$version',
                         updated = now()
                         WHERE id = '$id'
                         ");
         confirm($query);
 
-        redirect("/isp/public/package/index.php");
+        set_message("Personal info updated successfully");
+        redirect("profile.php");
     }
 }
 

@@ -1,5 +1,5 @@
 <?php
-require_once("../../../web/functions/donor_function.php");
+require_once("../../../web/functions/address_function.php");
 include("../../../web/resources/template/header.php");
 ?>
 
@@ -13,7 +13,7 @@ include("../../../web/resources/template/header.php");
 
             $id = escape_string($_GET['id']);
 
-            $result = query("SELECT * from address a 
+            $result = query("SELECT a.id as a_id, a.*, d.* from address a 
                                   JOIN donor d 
                                   ON d.address_id = a.id
                                   where login_id = '$id'");
@@ -23,10 +23,10 @@ include("../../../web/resources/template/header.php");
 
                 ?>
 
-                <?php update_donor(); ?>
+                <?php update_address(); ?>
 
                 <form action="" method="post" role="form">
-                    <input type="hidden" name="id" id="id" value="<?php echo $row['id']?>">
+                    <input type="hidden" name="a_id" id="a_id" value="<?php echo $row['a_id']?>">
                     <input type="hidden" name="version" id="version" value="<?php echo $row['version']?>">
 
                     <div class="row">

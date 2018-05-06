@@ -31,7 +31,14 @@ include("../../../web/resources/template/header.php");
                 <div class="col col-md-8">
                     <div class="form-group">
                         <label for=""></label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="name.."
+                               value="<?php echo isset($row['name']) ? $row['name'] : null ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for=""></label>
                         <select class="form-control" name="blood_type" id="blood_type">
+                            <option>select</option>
                             <option>A+</option>
                             <option>A-</option>
                             <option>B+</option>
@@ -41,12 +48,6 @@ include("../../../web/resources/template/header.php");
                             <option>AB+</option>
                             <option>AB-</option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input type="text" class="form-control" name="blood_type" id="blood_type" placeholder="blood group"
-                               value="<?php echo isset($row['name']) ? $row['name'] : null ?>">
                     </div>
 
                     <div class="form-group">
