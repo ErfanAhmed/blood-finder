@@ -7,6 +7,7 @@
  */
 require_once("function.php");
 require_once("address_function.php");
+require_once("search_freq_function.php");
 
 function get_donor_list() {
     $result = query("SELECT * FROM donor WHERE status = 'ACTIVE'");
@@ -68,6 +69,7 @@ function search_donor() {
                                 .$ps_search.$po_search.$city_search);
 
         confirm($result);
+        add_freq($blood_type);
 
         $i = 1;
         while ($row = fetch_array($result)) {
