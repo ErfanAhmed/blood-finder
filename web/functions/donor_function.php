@@ -22,6 +22,11 @@ function get_donor_list() {
     			<td>{$row['phone_no']}</td>
     			<td>{$row['email']}</td>
     			<td>{$row['status']}</td>
+    			<td>
+                    <a href='public_profile.php?id={$row['id']}'>
+                        visit profile
+                    </a>
+    			</td>
     		</tr>
         ";
         $i++;
@@ -54,7 +59,7 @@ function search_donor() {
             $city_search = " AND a.city = '{$city}'";
         }
 
-        $result = query("SELECT * FROM donor d
+        $result = query("SELECT d.id as d_id, a.id as a_id, a.*, d.* FROM donor d
                               JOIN address a
                               ON d.address_id = a.id
                               WHERE d.status = 'ACTIVE'
@@ -73,6 +78,11 @@ function search_donor() {
     			<td>{$row['blood_type']}</td>
     			<td>{$row['phone_no']}</td>
     			<td>{$row['email']}</td>
+    			<td>
+    			    <a href='public_profile.php?id={$row['d_id']}&a_id={$row['a_id']}'>
+                        visit profile
+                    </a>
+    			</td>
     		</tr>
         ";
             $i++;
@@ -119,7 +129,11 @@ function get_donor_profile () {
         echo "
             <div class=\"container\" >
                 <h2>Donor Name: <b> {$row['name']}</b></h2>
-                <p>Blood group: <b> {$row['blood_type']}</b></p>
+                <p>
+                    Blood group: <b> {$row['blood_type']}</b>
+                    &nbsp;&nbsp;
+                    Status: <b>{$row['status']}</b>
+                </p>
             </div>
             <hr>
             
@@ -178,6 +192,57 @@ function get_donor_profile () {
     } else {
         set_message("You must Login first");
         redirect("../../view/auth/login.php");
+    }
+}
+
+function get_public_profile () {
+    if (!empty($_GET['id'])) {
+
+        $donor_id = $_GET['id'];
+
+        $result = query("SELECT d.id as d_id, a.id as a_id, d.*, a.* FROM donor d
+                              JOIN address a 
+                              ON d.address_id = a.id
+                              WHERE d.id = '{$donor_id}'");
+        confirm($result);
+
+        $row = fetch_array($result);
+
+        echo "
+            <div class=\"container\" >
+                <h2>Donor Name: <b> {$row['name']}</b></h2>
+                <p>
+                    Blood group: <b> {$row['blood_type']}</b>
+                    &nbsp;&nbsp;
+                    Status: <b>{$row['status']}</b>
+                </p>
+            </div>
+            <hr>
+            
+            <ul class=\"container details\">
+                <li><p><span class=\"glyphicon glyphicon-phone\" style=\"width:50px;\"></span>
+                    phone: <b>{$row['phone_no']}</b></p></li>
+                    
+                <li><p><span class=\"glyphicon glyphicon-envelope\" style=\"width:50px;\"></span>
+                    email: <b>{$row['email']}</b></p></li>
+                    
+                <li><p><span class=\"glyphicon glyphicon-plus\" style=\"width:50px;\"></span>
+                    Last donation Date: <b>{$row['last_donation_date']}</b></p></li>
+            </ul>
+            <hr>
+            
+            <div>
+                <ul class=\"container details\"><li><p>
+                    <span class=\"glyphicon glyphicon-home\" style=\"width:50px;\"></span>
+                    address: <b> {$row['police_station']},</b> 
+                    <b> {$row['post_office']},</b>
+                    <b> {$row['city']}</b>
+                </p></li></ul>
+            </div>
+            <hr>
+        ";
+    } else {
+        redirect("../../view/welcome/index.php");
     }
 }
 

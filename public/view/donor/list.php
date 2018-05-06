@@ -15,6 +15,7 @@ include("../../../web/resources/template/header.php");
                 <th>Phone No</th>
                 <th>Email</th>
                 <th>Status</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
