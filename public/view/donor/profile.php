@@ -12,6 +12,13 @@ include("../../../web/resources/template/header.php");
 
                     <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
                         <img alt="User Pic" src="../../../web/resources/images/user_icon.png" id="profile-image1" class="img-circle img-responsive">
+
+                        <div style="padding-left: 70px; padding-top: 15px">
+                                <?php get_donor_rating(); ?>
+                                <button style="margin-top: -10px" name="" class="btn btn-success">
+                                    <i class="fa fa-thumbs-up fa-lg"></i>
+                                </button>
+                        </div>
                     </div>
 
                     <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >

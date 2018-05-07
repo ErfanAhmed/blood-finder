@@ -26,6 +26,7 @@ phone_no            int(11) UNIQUE,
 email               varchar(50) UNIQUE,
 nid_no              varchar(50) UNIQUE,
 status              varchar(11) DEFAULT 'ACTIVE',
+rating              int(11) not null,
 last_donation_date  date,
 address_id          int(11) not null,
 

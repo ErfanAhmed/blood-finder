@@ -13,9 +13,11 @@ function login() {
         $login_id = $_POST['login_id'];
         $password = $_POST['password'];
 
-        $result = query("SELECT d.login_id, d.password, d.name FROM donor d 
-                          where d.login_id = '$login_id' and d.password = '$password'
-                        ");
+        $result = query("SELECT login_id, password, name 
+                              FROM donor  
+                              where login_id = '$login_id' 
+                              and password = '$password'
+                            ");
 
         confirm($result);
 

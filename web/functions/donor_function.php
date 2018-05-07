@@ -182,7 +182,7 @@ function get_donor_profile () {
                         </td>
                         
                         <td style='padding-left: 5px'>
-                            <form action='/isp/resources/package_function.php' method='post' role='form'>
+                            <form action='' method='post' role='form'>
                                 <input type='hidden' name='id' id='id' value='{$row['id']}'>
                                 <button type='delete' name='delete' class='btn btn-danger'>Discontinue</button>
                             </form>                        
@@ -278,18 +278,18 @@ function update_donor() {
     }
 }
 
-delete_package();
-function delete_package() {
+delete_donor();
+function delete_donor() {
     if (isset($_POST['delete'])) {
         $id = escape_string($_POST['id']);
 
-        $query = query("UPDATE package SET
+        $query = query("UPDATE donor SET
                         status = 'DELETED'
                         WHERE id = '$id'
                         ");
         confirm($query);
 
-        redirect("/isp/public/package/index.php");
+        redirect("");
     }
 }
 
@@ -334,5 +334,42 @@ function po_dropdown() {
 
     while ($row = fetch_array($result)) {
         echo "<option value='{$row['post_office']}'>{$row['post_office']}</option>";
+    }
+}
+
+function get_donor_rating() {
+    if (isset($_GET['id']) || isset($_SESSION['user_id'])) {
+
+        $id = "";
+        $col_name = "";
+
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $col_name = "id";
+        } else if (isset($_SESSION['user_id'])) {
+            $id = $_SESSION['user_id'];
+            $col_name = "login_id";
+        }
+
+        $result = query("SELECT rating FROM donor WHERE {$col_name}={$id}");
+        confirm($result);
+
+        $single_result = fetch_array($result);
+
+        echo "<label style=\"font-size: xx-large\">{$single_result['rating']}</label>";
+    } else {
+        echo "<label style=\"font-size: xx-large\">N/A</label>";
+    }
+
+}
+
+function update_donor_rating() {
+    if (isset($_POST['submit'])) {
+
+        $id = $_POST['id'];
+        $result = query("UPDATE donor SET rating=(rating + 1) WHERE id={$id}");
+        confirm($result);
+
+        redirect("public_profile.php?id={$id}&a_id={$_GET['a_id']}");
     }
 }
