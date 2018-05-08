@@ -26,6 +26,13 @@ include("../../../web/resources/template/header.php");
             <input type="hidden" name="id" id="id" value="<?php echo $row['id']?>">
             <input type="hidden" name="version" id="version" value="<?php echo $row['version']?>">
 
+            <script type='text/javascript'>
+                $(document).ready(function(){
+                    $("#blood_type option:contains(" + '<?php echo $row['blood_type'] ?>' + ")").attr('selected', 'selected');
+                });
+
+            </script>
+
             <div class="row">
                 <div class="col col-md-2"></div>
                 <div class="col col-md-8">
