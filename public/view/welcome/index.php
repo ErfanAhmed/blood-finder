@@ -1,7 +1,34 @@
 <?php
 require_once("../../../web/functions/donor_function.php");
+require_once("../../../web/functions/chart_function.php");
 include("../../../web/resources/template/header.php");
 ?>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Blood Group VS Search count",
+                fontSize: 20
+            },
+            axisY: {
+                title: "Search Count",
+                includeZero: false
+            },
+            data: [{
+                type: "column",
+                dataPoints: <?php echo json_encode(get_count(), JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        chart.render();
+
+    }
+</script>
 
 <div class="container">
 
@@ -9,8 +36,8 @@ include("../../../web/resources/template/header.php");
 
         <div class="container">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
                     <h2>Search </h2>
                     <div>
                         <form action="../donor/filtered_list.php" method="post" role="form">
@@ -47,6 +74,10 @@ include("../../../web/resources/template/header.php");
                             </div>
                         </form>
                     </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div id="chartContainer" style="height: 100px; width: 100px;"></div>
                 </div>
             </div>
         </div>
