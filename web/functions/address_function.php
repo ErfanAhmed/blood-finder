@@ -9,11 +9,11 @@ require_once("function.php");
 function create_address () {
     if (isset($_POST['submit'])) {
 
-        $police_station = escape_string($_POST['police_station']);
-        $post_office = escape_string($_POST['post_office']);
+        $police_station = strtoupper(escape_string($_POST['police_station']));
+        $post_office = strtoupper(escape_string($_POST['post_office']));
         $post_code = escape_string($_POST['post_code']);
-        $city = escape_string($_POST['city']);
-        $division = escape_string($_POST['division']);
+        $city = strtoupper(escape_string($_POST['city']));
+        $division = strtoupper(escape_string($_POST['division']));
 
         $query = query("INSERT INTO address(police_station, post_office, post_code, city, division)
                         VALUES ('{$police_station}', '{$post_office}', '{$post_code}', '{$city}', '{$division}')");
@@ -28,11 +28,11 @@ function update_address () {
     if (isset($_POST['update'])) {
 
         $id = escape_string($_POST['a_id']);
-        $police_station = escape_string($_POST['police_station']);
-        $post_office = escape_string($_POST['post_office']);
+        $police_station = strtoupper(escape_string($_POST['police_station']));
+        $post_office = strtoupper(escape_string($_POST['post_office']));
         $post_code = escape_string($_POST['post_code']);
-        $city = escape_string($_POST['city']);
-        $division = escape_string($_POST['division']);
+        $city = strtoupper(escape_string($_POST['city']));
+        $division = strtoupper(escape_string($_POST['division']));
         $version = (int)escape_string($_POST['version']) + 1;
 
         $query = query("UPDATE address SET
