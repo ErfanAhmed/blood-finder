@@ -3,30 +3,39 @@ require_once("../../../web/functions/donor_function.php");
 require_once("../../../web/functions/chart_function.php");
 include("../../../web/resources/template/header.php");
 ?>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
 
-<script>
-    window.onload = function () {
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
 
-        var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            theme: "light2", // "light1", "light2", "dark1", "dark2"
-            title: {
-                text: "Blood Group VS Search count",
-                fontSize: 20
-            },
-            axisY: {
-                title: "Search Count",
-                includeZero: false
-            },
-            data: [{
-                type: "column",
-                dataPoints: <?php echo json_encode(get_count(), JSON_NUMERIC_CHECK); ?>
-            }]
-        });
-        chart.render();
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+
+        data.addRows(<?php echo get_count()?>);
+
+        // Set chart options
+        var options = {'title':'BLOOD GROUP VS SEARCH COUNT',
+                        'width':400,
+                        'height':300,
+                        'is3D' : false,
+                        'legend' : 'right'
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
     }
 </script>
 
@@ -77,7 +86,7 @@ include("../../../web/resources/template/header.php");
                 </div>
 
                 <div class="col-md-4">
-                    <div id="chartContainer" style="height: 100px; width: 100px;"></div>
+                    <div id="chart_div"></div>
                 </div>
             </div>
         </div>
