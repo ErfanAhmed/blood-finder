@@ -197,6 +197,11 @@ function get_donor_profile () {
     }
 }
 
+/**
+ * public profile of donor
+ * with less info
+ * no post action can be performed
+ */
 function get_public_profile () {
     if (!empty($_GET['id'])) {
 
@@ -248,8 +253,11 @@ function get_public_profile () {
     }
 }
 
+/**
+ * Only logged in donor can update their profile info
+ */
 function update_donor() {
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update']) && isset($_SESSION['user_id'])) {
 
         $id = escape_string($_POST['id']);
         $name = escape_string($_POST['name']);
@@ -278,7 +286,11 @@ function update_donor() {
     }
 }
 
-delete_donor();
+/**
+ * not implemented
+ * This will not actually delete rows from DB
+ * but changes donor status from ACTIVE to DELETED
+ */
 function delete_donor() {
     if (isset($_POST['delete'])) {
         $id = escape_string($_POST['id']);
@@ -293,6 +305,9 @@ function delete_donor() {
     }
 }
 
+/**
+ * Get distinct blood type from donor table
+ */
 function bt_dropdown() {
     $result = query("SELECT distinct blood_type FROM donor");
     confirm($result);

@@ -1,11 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Erfan_Farhan_Farin
- * Date: 9/19/2017
- * Time: 9:00 PM
+ * User: erfan
+ * Date: 5/2/18
+ * Time: 11:14 PM
  */
 ob_start();
+
+/**
+ * this keep the session information until removed
+ * basically needed for user authentication
+ */
 session_start();
 
 //DB connection configuration

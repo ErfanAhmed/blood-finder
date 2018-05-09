@@ -75,7 +75,9 @@ include("../../../web/resources/template/header.php");
                             </div>
 
 
-                            <button type="submit" name="update" class="btn btn-primary">Update</button>
+                            <div class="form-group" style="text-align: center">
+                                <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                            </div>
                         </div>
                     </div>
                 </form>
